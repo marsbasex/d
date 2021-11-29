@@ -24,7 +24,7 @@ if [[ $? != 0 ]]; then
 fi
 
 if [[ `docker ps -a |grep SUPERMINER_MANAGE|wc -l` > 0 ]]; then
-    docker stop SUPERMINER_MANAGE && docker rm SUPERMINER_MANAGE
+    docker stop SUPERMINER_MANAGE && docker rm SUPERMINER_MANAGE && docker rmi solarshipx/manage:latest
 fi
 
 docker pull solarshipx/manage
