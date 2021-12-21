@@ -27,6 +27,6 @@ if [[ `docker ps -a |grep SUPERMINER_MANAGE|wc -l` > 0 ]]; then
     docker stop SUPERMINER_MANAGE && docker rm SUPERMINER_MANAGE && docker rmi solarshipx/manage:latest
 fi
 
-docker pull solarshipx/manage
-
-docker run -d --restart always --name SUPERMINER_MANAGE --network host -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/superminer:/usr/local/superminer solarshipx/manage manage
+ver=${1:=latest}
+docker pull solarshipx/manage:$ver
+docker run -d --restart always --name SUPERMINER_MANAGE --network host -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/superminer:/usr/local/superminer solarshipx/manage:$ver manage
