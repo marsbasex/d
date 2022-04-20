@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# prepare commands
+apt-get install -y curl net-tools
+
 # get
 # static
 # recover
