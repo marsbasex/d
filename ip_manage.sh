@@ -63,9 +63,9 @@ EOF
 
 function recover() {
     if [  -f ${File} ];then
-		rm -f $File
-		netplan apply
-		echo "IP配置已恢复"
+        rm -f $File
+        netplan apply
+        echo "IP配置已恢复"
     else
         echo "未曾用该脚本配置IP"
     fi
