@@ -39,8 +39,20 @@ function static() {
     fi
 
     IPAndMASK=`ip addr |awk '/inet /' |sed -n '2p' |awk -F' ' '{print $2}' `
+    if [ "$IPAndMASK" = "" ]; then
+        echo "获取IP出错"
+        exit -1
+    fi
     Name=`route | grep 'default' | awk '{print $8}'`
+    if [ "$Name" = "" ]; then
+        echo "获取网卡出错"
+        exit -1
+    fi
     GATEWAY=`route -n| grep ${Name} |grep 'UG'| awk '{print $2}'`
+    if [ "$GATEWAY" = "" ]; then
+        echo "获取GATEWAY出错"
+        exit -1
+    fi
 
     if [  -f ${File} ];then
         echo "IP曾固定过，具体如下："
