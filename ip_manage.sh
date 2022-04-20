@@ -1,8 +1,11 @@
 #!/bin/bash
+
 # get
 # static
 # recover
+
 File="/etc/netplan/88-ip-config.yaml"
+
 #Check NetWork
 function network()
 {
@@ -16,21 +19,26 @@ function network()
     fi
     return 0
 }
+
 function get() {
     # echo run get $1
     netplan get
 }
+
 function static() {
     # echo run static $1
+
     # check network
     network
     if [ $? -eq 0 ];then
         echo "请检查您的网络，服务器无网络"
         exit -1
     fi
+
     IPAndMASK=`ip addr |awk '/inet /' |sed -n '2p' |awk -F' ' '{print $2}' `
     Name=`route | grep 'default' | awk '{print $8}'`
     GATEWAY=`route -n| grep ${Name} |grep 'UG'| awk '{print $2}'`
+
     if [  -f ${File} ];then
         echo "IP曾固定过，具体如下："
     else
@@ -45,22 +53,25 @@ network:
             gateway4: $GATEWAY
             nameservers:
                 addresses:
-                    - $GATEWAY
+                    - 223.5.5.5
+                    - 119.29.29.29
 EOF
     fi
     netplan apply
     get
 }
+
 function recover() {
     if [  -f ${File} ];then
-        rm -f $File
-        netplan apply
-        echo "IP配置已恢复"
+		rm -f $File
+		netplan apply
+		echo "IP配置已恢复"
     else
         echo "未曾用该脚本配置IP"
     fi
     get
 }
+
 function help() {
     echo "Usage: $0 <command>"
     echo "commands:"
@@ -68,6 +79,7 @@ function help() {
     echo "    static : Fix ip config"
     echo "    recover: recover ip config"
 }
+
 function main() {
     cmd=$1
     if [ "$cmd" = "" ]; then
@@ -77,5 +89,6 @@ function main() {
     # echo start $cmd $arg
     $cmd
 }
+
 # command arg
 main $1 $2
