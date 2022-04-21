@@ -65,6 +65,7 @@ network:
         $Name:
             addresses:
                 - $IPAndMASK
+            dhcp4: false
             gateway4: $GATEWAY
             nameservers:
                 addresses:
