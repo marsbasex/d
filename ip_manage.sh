@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION=v0.0.1
+
 # prepare commands
 if ! command -v curl &> /dev/null
 then
@@ -218,6 +220,7 @@ EOF
 }
 
 function help() {
+    echo "VERSION: $VERSION"
     echo "Usage: $0 <command>"
     echo "commands:"
     echo "    get    : list current ip config"
