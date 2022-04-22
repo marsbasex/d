@@ -24,9 +24,9 @@ curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s dhcp
 ### 下载脚本到指定路径
 curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh --output $HOME/ip_manage.sh
 ### 执行示例 (参考说明：通过curl执行)
-bash $HOME/ip_manage.sh get
-bash $HOME/ip_manage.sh autostatic
-bash $HOME/ip_manage.sh static 10.10.10.201/24 10.10.10.1 233.5.5.5,119.29.29.29
-bash $HOME/ip_manage.sh recover
-bash $HOME/ip_manage.sh dhcp
+sudo bash $HOME/ip_manage.sh get
+sudo bash $HOME/ip_manage.sh autostatic
+sudo bash $HOME/ip_manage.sh static 10.10.10.201/24 10.10.10.1 233.5.5.5,119.29.29.29
+sudo bash $HOME/ip_manage.sh recover
+sudo bash $HOME/ip_manage.sh dhcp
 ```
