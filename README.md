@@ -10,7 +10,7 @@ curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s auto
 ### 固定指定IP配置
 curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s static <ip/mask> <gateway> <dns,dns...>
 示例：
-curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s static 10.10.10.201/24 10.10.10.1 233.5.5.5,119.29.29.29
+curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s static 10.10.10.201/24 10.10.10.1 223.5.5.5,119.29.29.29
 
 ### 恢复固定前的IP配置
 curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh | sudo bash -s recover
@@ -26,7 +26,7 @@ curl -s https://cdn.jsdelivr.net/gh/marsbasex/d/ip_manage.sh --output $HOME/ip_m
 ### 执行示例 (参考说明：通过curl执行)
 sudo bash $HOME/ip_manage.sh get
 sudo bash $HOME/ip_manage.sh autostatic
-sudo bash $HOME/ip_manage.sh static 10.10.10.201/24 10.10.10.1 233.5.5.5,119.29.29.29
+sudo bash $HOME/ip_manage.sh static 10.10.10.201/24 10.10.10.1 223.5.5.5,119.29.29.29
 sudo bash $HOME/ip_manage.sh recover
 sudo bash $HOME/ip_manage.sh dhcp
 ```
