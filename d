@@ -23,9 +23,12 @@ if [[ $? != 0 ]]; then
     apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 fi
 
+echo '{"registry-mirrors": ["https://registry.solarshipx.com"]}' > /etc/docker/daemon.json
 if [[ `docker ps -a |grep SUPERMINER_MANAGE|wc -l` > 0 ]]; then
     docker stop SUPERMINER_MANAGE && docker rm SUPERMINER_MANAGE && docker rmi solarshipx/manage:latest
 fi
+
+systemctl restart docker
 
 ver=${1:-latest}
 docker pull solarshipx/manage:$ver
