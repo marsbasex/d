@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get purge -y unattended-upgrades update-manager-core
-apt-get install -y vim && update-alternatives --set editor /usr/bin/vim.basic
+apt-get install -y vim curl && update-alternatives --set editor /usr/bin/vim.basic
 locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
 
 dpkg -l|grep -q "^ii  docker-ce"
@@ -16,8 +16,9 @@ if [[ $? != 0 ]]; then
     #echo "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 
     # Aliyun mirror
-    curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
-    echo "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+    curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 
     apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
     apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
