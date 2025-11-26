@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VERSION=v0.0.1
+umask 0077
 
 # prepare commands
 if ! command -v curl &> /dev/null
@@ -99,7 +100,9 @@ network:
             addresses:
                 - $IPAndMASK
             dhcp4: false
-            gateway4: $GATEWAY
+            routes:
+                - to: default
+                  via: $GATEWAY
             nameservers:
                 addresses:
                     - 223.5.5.5
@@ -172,7 +175,9 @@ network:
             addresses:
                 - $IPAndMASK
             dhcp4: false
-            gateway4: $GATEWAY
+            routes:
+                - to: default
+                  via: $GATEWAY
             nameservers:
                 addresses:
 `echo -e "$dnslines"`
@@ -237,6 +242,7 @@ function main() {
         help
         exit -1
     fi
+    chmod 0600 /etc/netplan/*.yaml
     $cmd $*
 }
 
